@@ -1,0 +1,16 @@
+{
+  "name": "videosplit",
+  "version": "0.1.0",
+  "description": "Desktop app for marking an In/Out range on an MP4 and exporting it losslessly.",
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/start.js"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0"
+  }
+}

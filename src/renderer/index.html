@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; media-src 'self' file: blob:; img-src 'self' data: blob:; style-src 'self'">
+  <title>VideoSplit</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="toolbar">
+    <button id="openBtn" title="Open video (Ctrl+O)">Open…</button>
+    <span id="fileName" class="file-name">No file loaded</span>
+    <span class="spacer"></span>
+    <button id="helpBtn" title="Keyboard shortcuts (?)">Shortcuts</button>
+    <button id="exportBtn" class="primary" disabled title="Export In→Out (Ctrl+E)">Export clip</button>
+  </header>
+
+  <main id="stage" class="stage">
+    <video id="video" preload="auto"></video>
+    <div id="dropHint" class="drop-hint">Open or drop an MP4 file here</div>
+  </main>
+
+  <section class="transport">
+    <button id="playBtn" disabled title="Play/Pause (Space)">▶</button>
+    <span id="timecode" class="timecode">00:00:00.000 / 00:00:00.000</span>
+    <span id="rate" class="rate"></span>
+    <span class="spacer"></span>
+    <span class="marks">
+      <span>In <b id="inLabel">--</b></span>
+      <span>Out <b id="outLabel">--</b></span>
+      <span>Length <b id="lenLabel">--</b></span>
+    </span>
+    <span class="spacer"></span>
+    <label class="vol">🔊 <input id="volume" type="range" min="0" max="1" step="0.01" value="1"></label>
+    <span class="zoom">
+      <button id="zoomOut" title="Zoom out (-)">−</button>
+      <span id="zoomLabel">1×</span>
+      <button id="zoomIn" title="Zoom in (+)">+</button>
+    </span>
+  </section>
+
+  <section id="timeline" class="timeline">
+    <div id="track" class="track">
+      <div id="ruler" class="ruler"></div>
+      <div id="thumbs" class="thumbs"></div>
+      <div id="selection" class="selection hidden"></div>
+      <div id="inMarker" class="marker in hidden"></div>
+      <div id="outMarker" class="marker out hidden"></div>
+      <div id="playhead" class="playhead"></div>
+    </div>
+  </section>
+
+  <div id="status" class="status"></div>
+
+  <div id="help" class="help hidden">
+    <div class="help-card">
+      <h2>Keyboard shortcuts</h2>
+      <table>
+        <tr><td>Space / K</td><td>Play / pause</td></tr>
+        <tr><td>L / J</td><td>Play forward / reverse (press again to speed up)</td></tr>
+        <tr><td>← / →</td><td>Step one frame</td></tr>
+        <tr><td>Shift + ← / →</td><td>Jump 1 second</td></tr>
+        <tr><td>Ctrl + ← / →</td><td>Jump 10 seconds</td></tr>
+        <tr><td>Home / End</td><td>Go to start / end</td></tr>
+        <tr><td>I / O</td><td>Set In / Out at playhead</td></tr>
+        <tr><td>Shift + I / Shift + O</td><td>Go to In / Out</td></tr>
+        <tr><td>P</td><td>Play selection (In → Out)</td></tr>
+        <tr><td>X</td><td>Clear In / Out</td></tr>
+        <tr><td>M</td><td>Mute / unmute</td></tr>
+        <tr><td>+ / − or Ctrl + wheel</td><td>Zoom timeline</td></tr>
+        <tr><td>Ctrl + O</td><td>Open file</td></tr>
+        <tr><td>Ctrl + E</td><td>Export selection</td></tr>
+        <tr><td>?</td><td>Toggle this help</td></tr>
+      </table>
+      <p class="note">Export is a fast stream copy (no re-encode). The clip starts at the nearest keyframe at or before In, so it may begin slightly early.</p>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
